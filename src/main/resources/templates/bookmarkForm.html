@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="fragments/header :: head"></head>
+<body>
+  	<div class="container">
+		<h1><a href="/bookmark/">My Bookmark List</a></h1>	
+		<h3>
+			<span th:if="${bookmark.id}">Edit Bookmark</span>
+			<span th:unless="${bookmark.id}">Add Bookmark</span>
+		</h3>
+		<form method="post" action="/bookmark/">
+
+			<input type="hidden" th:field="*{bookmark.id}" />
+
+			<div class="form-group col-md-6">
+				<label for="bookmarkDatePicker">DateTime</label>
+				<input id="bookmarkDatePicker" name="date" required autocomplete="off" type='text' class="form-control" th:value="*{bookmark.date}"  placeholder="Select a Datetime"/>
+			</div>
+
+			<div class="form-group col-md-6">
+				<label for="bookmarkName">Name</label>
+				<input type="text" id="bookmarkName" class="form-control" required placeholder="Type upto 20 characters"  th:field="*{bookmark.name}" />
+			</div>
+
+			<div class="form-group col-md-6">
+				<label for="bookmarkDesc">Description</label>
+				<textarea class="form-control" id="bookmarkDesc"  rows="5" required th:field="*{bookmark.description}" placeholder="Type upto 1024 characters"></textarea>
+			</div>
+
+			<div class="form-group col-md-6">				
+				<button type="submit" class="btn btn-primary">Save</button>	
+				<button type="button" onclick="window.location.href = '/bookmark/';"  class="btn btn-outline-dark">Go Home</button>
+	            <span th:if="${bookmark.id}"><button type="button"  th:onclick="javascript:confirmBookmarkDelete('[[${bookmark.id}]]', goHome);"  class="btn btn-danger">Delete</button></span>		
+			</div>
+				
+		</form>
+	</div>
+
+	<script type="text/javascript">
+		jQuery('#bookmarkDatePicker').datetimepicker({
+			format: 'Y-m-d H:i',
+			inline: false,
+			lang: 'en'
+		});
+	</script>
+
+</body>
+</html>

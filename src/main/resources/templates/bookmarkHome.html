@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="fragments/header :: head"></head>
+<body>
+	<div class="container">
+		<h1><a href="/bookmark/">My Bookmark List</a></h1>	
+		<div class="mb-1"> 
+			<a href="/bookmark/add" class="btn  btn-outline-dark">
+			<i class="fa fa-plus" aria-hidden="true"></i> Add New Bookmark</a>
+		</div>
+		<div id="bookmark-table"></div>
+	</div>
+	<script>
+		var bookmarkTable = new Tabulator("#bookmark-table", {
+			pagination:"remote", //enable remote pagination
+			headerSort:false,
+			layout:"fitColumns",
+			responsiveLayout:"collapse",
+			placeholder: "No Bookmark Available",
+			ajaxURL:"/bookmark/list", //set url for ajax request
+				paginationDataReceived:{
+				"last_page":"max_pages", //change last_page parameter name to "max_pages"
+			},
+			//paginationSize:2,
+			paginationDataReceived:{
+				"last_page":"totalPage", //change last_page parameter name to "max_pages"
+			} ,
+			columns:[
+				{ title: "Date", field: "date", formatter: "datetime", formatter: function(cell, formatterParams, onRendered){
+					let dateLocaleString = "";
+					try {
+						dateLocaleString = moment(new Date(Date.parse(cell.getData().date)).toString()).format('YYYY-MM-DD HH:mm');;
+					} catch(ex){
+						dateLocaleString = "(invalid date)" + ex;
+					}
+					return dateLocaleString;
+				}
+				},
+				{ title: "Name", field: "name" },
+				{ title: "Description", field: "description" },
+				{	title: "Actions",
+					formatter:actionsFormatter, hozAlign:"center"}
+			],
+		});
+
+		//custom formatter definition
+		function actionsFormatter(cell, formatterParams, onRendered){ //plain text value
+			var viewButton = '<a href="/bookmark/' + cell.getData().id + '" class="btn btn-outline-info">View</a>';
+			var editButton = '<a href="/bookmark/edit/' + cell.getData().id + '" class="btn btn-outline-primary">Edit</a>';
+			var deleteButton = '<a href="javascript:confirmBookmarkDelete(\''+ cell.getData().id +'\', pageRefresh);" class="btn btn-danger">Delete</a>';
+			var actions = viewButton + " " + editButton + " " + deleteButton;
+			return actions;
+		};
+
+	</script>
+	<footer lang="en" th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

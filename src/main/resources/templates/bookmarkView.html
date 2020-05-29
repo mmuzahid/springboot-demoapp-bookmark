@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en" th:replace="fragments/header :: head"></head>
+
+<body>
+
+    <div class="container">
+        <h1><a href="/bookmark/">My Bookmark List</a></h1>
+        <h3>Bookmark Details</h3>
+
+        <div class="form-group col-md-6">
+            <span class="font-weight-bold">DateTime:</span>
+            <span th:text="${#dates.format(bookmark.date, 'yyyy-MM-dd HH:mm')}"></span>
+        </div>
+
+        <div class="form-group col-md-6">
+            <span class="font-weight-bold">Name:</span>
+            <span th:text="${bookmark.name}"></span>
+        </div>
+
+        <div class="form-group col-md-12">
+            <span class="font-weight-bold">Description:</span>
+            <pre th:text="${bookmark.description}"></pre>
+        </div>
+
+
+        <div class="form-group col-md-6">				
+            <button type="button"  th:onclick="window.location.href = '/bookmark/edit/[[${bookmark.id}]]';"  class="btn btn-primary">Edit</button>	
+            <button type="button" onclick="window.location.href = '/bookmark/';"  class="btn btn-outline-dark">Go Home</button>
+	        <button type="button"  th:onclick="javascript:confirmBookmarkDelete('[[${bookmark.id}]]', goHome);"  class="btn btn-danger">Delete</button>		
+	
+        </div>
+    </div>
+
+</body>
+
+</html>
