@@ -9,17 +9,41 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import my.demo.bookmark.service.RequestScopeBean;
-import my.demo.bookmark.service.SessionScopeBean;
+import my.demo.bookmark.playground.services.PrototypeScopeSettings;
+import my.demo.bookmark.playground.services.RequestScopeSettings;
+import my.demo.bookmark.playground.services.SessionScopeSettings;
+import my.demo.bookmark.playground.services.SingletonScopeSettings;
 
 @Controller
 @RequestMapping("/playground")
 public class PlaygroundController {
-	
-	@GetMapping("/")
-	public String home(Model model) {
+	@Autowired
+	private HttpServletRequest request;
+	@Autowired
+	private HttpSession session;
+	@Autowired
+	private RequestScopeSettings requestScopeSettings;
+	@Autowired
+	private SessionScopeSettings sessionScopeSettings;
+	@Autowired
+	private SingletonScopeSettings singletonScopeSettings;
+	@Autowired
+	private PrototypeScopeSettings prototypeScopeSettings;
+	@Autowired
 
+	@GetMapping("/")
+	public String home() {
 		return "playgroundHome";
+	}
+
+	@GetMapping("/beanScope")
+	public String beanScope(Model model) {
+		model.addAttribute("requestScopeSettings", requestScopeSettings);
+		model.addAttribute("sessionScopeSettings", sessionScopeSettings);
+		model.addAttribute("singletonScopeSettings", singletonScopeSettings);
+		model.addAttribute("prototypeScopeSettings", prototypeScopeSettings);
+
+		return "playgroundBeanScope";
 	}
 
 }

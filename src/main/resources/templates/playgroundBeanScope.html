@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="fragments/header :: head"></head>
+<body>
+	<div class="container">
+		<h1><a href="/playground/">My Playground</a></h1>	
+	
+		<div class="mb-1"> 
+			Spring Bean Scope Exmaple
+		</div>
+				
+		<div class="mb-1"> 
+			<div class="font-weight-bold">Session Scope Bean</div>
+			<div>SessionScopeSettings:  <span th:text="${sessionScopeSettings}"></span></div>
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;SessionScopeSettings.requestScopeSettings:  <span th:text="${sessionScopeSettings.requestScopeSettings}"></span></div>
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;SessionScopeSettings.sessionScopeSettings:  <span th:text="${sessionScopeSettings.sessionScopeSettings}"></span></div>
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;SessionScopeSettings.singletonScopeSettings:  <span th:text="${sessionScopeSettings.singletonScopeSettings}"></span></div>
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;SessionScopeSettings.prototypeScopeSettings:  <span th:text="${sessionScopeSettings.prototypeScopeSettings}"></span></div>
+		</div>
+		
+		<div class="mb-1"> 
+			<div class="font-weight-bold">Request Scope Bean</div>
+			<div>RequestScopeSettings:  <span th:text="${requestScopeSettings}"></span></div>
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;RequestScopeSettings.requestScopeSettings:  <span th:text="${requestScopeSettings.requestScopeSettings}"></span></div>
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;RequestScopeSettings.sessionScopeSettings:  <span th:text="${requestScopeSettings.sessionScopeSettings}"></span></div>
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;RequestScopeSettings.singletonScopeSettings:  <span th:text="${requestScopeSettings.singletonScopeSettings}"></span></div>
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;RequestScopeSettings.prototypeScopeSettings:  <span th:text="${requestScopeSettings.prototypeScopeSettings}"></span></div>
+		</div>		
+	
+		<div class="mb-1"> 
+			<div class="font-weight-bold">Singleton Scope Bean</div>
+			<div>SingletonScopeSettings:  <span th:text="${singletonScopeSettings}"></span></div>
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;SingletonScopeSettings.requestScopeSettings:  <span th:text="${singletonScopeSettings.requestScopeSettings}"></span></div>
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;SingletonScopeSettings.sessionScopeSettings:  <span th:text="${singletonScopeSettings.sessionScopeSettings}"></span></div>
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;SingletonScopeSettings.singletonScopeSettings:  <span th:text="${singletonScopeSettings.singletonScopeSettings}"></span></div>
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;SingletonScopeSettings.prototypeScopeSettings:  <span th:text="${singletonScopeSettings.prototypeScopeSettings}"></span></div>
+		</div>	
+	
+		<div class="mb-1"> 
+			<div class="font-weight-bold">Prototype Scope Bean</div>
+			<div>PrototypeScopeSettings:  <span th:text="${prototypeScopeSettings}"></span></div>
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;PrototypeScopeSettings.requestScopeSettings:  <span th:text="${prototypeScopeSettings.requestScopeSettings}"></span></div>
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;PrototypeScopeSettings.sessionScopeSettings:  <span th:text="${prototypeScopeSettings.sessionScopeSettings}"></span></div>
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;PrototypeScopeSettings.singletonScopeSettings:  <span th:text="${prototypeScopeSettings.singletonScopeSettings}"></span></div>
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;PrototypeScopeSettings.prototypeScopeSettings:  <span th:text="${prototypeScopeSettings.prototypeScopeSettings}"></span></div>
+		</div>	
+
+	</div>
+
+	<footer lang="en" th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>
