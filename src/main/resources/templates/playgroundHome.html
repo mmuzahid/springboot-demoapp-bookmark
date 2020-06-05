@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="fragments/header :: head"></head>
+<body>
+	<div class="container">
+		<h1><a href="/playground/">My Playground</a></h1>	
+	
+		<div class="mb-1"> 
+			Will Practice some feature of Spring / Spring-Boot
+		</div>
+	
+	
+		<div class="mb-1"> 
+			HTTP Session Object:  <span th:text="${#session}"></span>
+		</div>
+		<div class="mb-1"> 
+			HTTP Request Object:  <span th:text="${#request}"></span>
+		</div>
+		
+	</div>
+
+	<footer lang="en" th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>
