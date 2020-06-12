@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -44,6 +45,19 @@ public class PlaygroundController {
 		model.addAttribute("prototypeScopeSettings", prototypeScopeSettings);
 
 		return "playgroundBeanScope";
+	}
+	
+	@GetMapping("/getNullPointerException")
+	public String getNullPointerException(Model model) {
+		throw new NullPointerException("This is a test NullPointerException");
+	}
+	
+	
+	@ExceptionHandler(NullPointerException.class)
+	public String handleNpeException(NullPointerException npe, Model model) {
+		model.addAttribute("type", npe.getClass());
+		model.addAttribute("details", "Exception caught by Controller-based @ExceptionHandler - Message:" + npe.getMessage());
+		return "playgroundExceptionHandler";
 	}
 
 }
