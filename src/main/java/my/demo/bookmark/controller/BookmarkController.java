@@ -1,4 +1,6 @@
 package my.demo.bookmark.controller;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -6,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.view.RedirectView;
 
 import my.demo.bookmark.dto.TabulatorBookmarksDto;
 import my.demo.bookmark.dto.converter.TabulatorBookmarksDtoConverter;
@@ -35,10 +37,13 @@ public class BookmarkController {
 	}
 	
 	@PostMapping(value = "/")
-	public RedirectView save(
-			@ModelAttribute("bookmark") Bookmark bookmark) {
+	public String save(@ModelAttribute("bookmark") @Valid Bookmark bookmark, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "bookmarkForm";
+		}
+
 		bookmarkService.saveBookmark(bookmark);
-		return new RedirectView("/bookmark/");
+		return "redirect:/bookmark/";
 	}
 
 	@DeleteMapping("/{id}")

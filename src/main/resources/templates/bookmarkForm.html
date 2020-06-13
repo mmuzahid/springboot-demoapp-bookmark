@@ -14,17 +14,20 @@
 
 			<div class="form-group col-md-6">
 				<label for="bookmarkDatePicker">DateTime</label>
-				<input id="bookmarkDatePicker" name="date" required autocomplete="off" type='text' class="form-control" th:value="*{bookmark.date}"  placeholder="Select a Datetime"/>
+				<input id="bookmarkDatePicker" name="date" autocomplete="off" type='text' class="form-control" th:value="${#dates.format(bookmark.date, 'yyyy-MM-dd HH:mm')}"  placeholder="Select a Datetime"/>
+				<span th:if="${#fields.hasErrors('bookmark.date')}" th:errors="*{bookmark.date}" class="text-danger"></span>
 			</div>
 
 			<div class="form-group col-md-6">
 				<label for="bookmarkName">Name</label>
-				<input type="text" id="bookmarkName" class="form-control" required placeholder="Type upto 20 characters"  th:field="*{bookmark.name}" />
+				<input type="text" id="bookmarkName" class="form-control" placeholder="Type name between 5 to 50 characters"  th:field="*{bookmark.name}" />
+				<span th:if="${#fields.hasErrors('bookmark.name')}" th:errors="*{bookmark.name}" class="text-danger"></span>
 			</div>
 
 			<div class="form-group col-md-6">
 				<label for="bookmarkDesc">Description</label>
-				<textarea class="form-control" id="bookmarkDesc"  rows="5" required th:field="*{bookmark.description}" placeholder="Type upto 1024 characters"></textarea>
+				<textarea class="form-control" id="bookmarkDesc"  rows="5" th:field="*{bookmark.description}" placeholder="Type description between 5 to 1000 characters"></textarea>
+				<span th:if="${#fields.hasErrors('bookmark.description')}" th:errors="*{bookmark.description}" class="text-danger"></span>
 			</div>
 
 			<div class="form-group col-md-6">				
