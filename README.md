@@ -17,7 +17,11 @@
 - Maven3
 
 ### Database Setup:
-- I have used H2 file based database for development purpose so no configuration change required.
+- MySQL Database: Create database `bookmarkdb` and set username and password at src/main/resources/application.properties file as bellow:
+		
+		spring.datasource.url=jdbc:mysql://localhost:3306/bookmarkdb
+		spring.datasource.username=root
+		spring.datasource.password=root
 
 ### Install Lombok in your IDE (for development purpose):
 - Go to lombok maven dependecy folder e.g. {Users_Home}\.m2\repository\org\projectlombok\lombok\1.18.12\
