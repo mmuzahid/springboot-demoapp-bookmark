@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="fragments/header :: head"></head>
+<body>
+  	<div class="container">
+		<h1><a href="/tag/">My Tag List</a></h1>	
+		<h3>
+			<span th:if="${tag.id}">Edit Tag</span>
+			<span th:unless="${tag.id}">Add Tag</span>
+		</h3>
+		<form method="post" action="/tag/">
+
+			<input type="hidden" th:field="*{tag.id}" />
+
+			<div class="form-group col-md-6">
+				<label for="tagName">Name</label>
+				<input type="text" id="tagName" class="form-control" placeholder="Type name between 2 to 20 characters"  th:field="*{tag.name}" />
+				<span th:if="${#fields.hasErrors('tag.name')}" th:errors="*{tag.name}" class="text-danger"></span>
+			</div>
+
+			<div class="form-group col-md-6">				
+				<button type="submit" class="btn btn-primary">Save</button>	
+				<button type="button" onclick="window.location.href = '/tag/';"  class="btn btn-outline-dark">Go Home</button>
+	            <span th:if="${tag.id}"><button type="button"  th:onclick="javascript:confirmTagDelete('[[${tag.id}]]', goHome);"  class="btn btn-danger">Delete</button></span>		
+			</div>
+				
+		</form>
+	</div>
+
+</body>
+</html>
