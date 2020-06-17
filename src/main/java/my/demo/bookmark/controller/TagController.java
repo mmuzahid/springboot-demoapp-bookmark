@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import my.demo.bookmark.dto.TabulatorTagsDto;
-import my.demo.bookmark.dto.converter.TabulatorTagsDtoConverter;
+import my.demo.bookmark.dto.TabulatorDto;
+import my.demo.bookmark.dto.converter.TabulatorDtoConverter;
 import my.demo.bookmark.entity.Tag;
 import my.demo.bookmark.service.TagService;
 
@@ -82,12 +82,11 @@ public class TagController {
 
 	@GetMapping(value = "/list", produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public TabulatorTagsDto list(@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
+	public TabulatorDto<Tag> list(@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
 			@RequestParam(name = "size", required = false, defaultValue = "10") Integer pageSize, @RequestParam(name = "sortBy", required = false, defaultValue = "id") String sortBy) {
 	
 		Page<Tag> tagPage = tagService.getTagsPage(page-1, pageSize, sortBy);
-		
-		return TabulatorTagsDtoConverter.convertToDto(tagPage);
+		return TabulatorDtoConverter.<Tag>convertToDto(tagPage);
 	}
 
 }
