@@ -1,6 +1,8 @@
 package my.demo.bookmark.controller;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,8 @@ import my.demo.bookmark.service.TagService;
 @RequestMapping("/tag")
 public class TagController {
 
+	private static Logger logger = LoggerFactory.getLogger(TagController.class); 
+	
 	@Autowired
 	private TagService tagService;
 	
@@ -43,13 +47,17 @@ public class TagController {
 		}
 
 		tagService.saveTag(tag);
+		logger.info("Saved Tag : {}", tag);
 		return "redirect:/tag/";
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity delete(@PathVariable(name="id") Long id, Model model) {
 		try{
+			Tag tag = tagService.getTagById(id);
+			logger.info("Deleting Tag: {}", tag);
 			tagService.deleteTagById(id);
+			logger.info("Deleted Tag id: {}", id);
 			return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch(Exception ex) {
 			return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);

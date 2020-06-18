@@ -1,6 +1,8 @@
 package my.demo.bookmark.controller;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,8 @@ import my.demo.bookmark.service.BookmarkService;
 @RequestMapping("/bookmark")
 public class BookmarkController {
 
+	private static Logger logger = LoggerFactory.getLogger(BookmarkController.class); 
+	
 	@Autowired
 	private BookmarkService bookmarkService;
 	
@@ -43,13 +47,17 @@ public class BookmarkController {
 		}
 
 		bookmarkService.saveBookmark(bookmark);
+		logger.info("Saved Bookmark : {}", bookmark);
 		return "redirect:/bookmark/";
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity delete(@PathVariable(name="id") Long id, Model model) {
 		try{
+			Bookmark bookmark = bookmarkService.getBookmarkById(id);
+			logger.info("Deleting Bookmark: {}", bookmark);
 			bookmarkService.deleteBookmarkById(id);
+			logger.info("Deleted Bookmark id: {}", id);
 			return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch(Exception ex) {
 			return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
