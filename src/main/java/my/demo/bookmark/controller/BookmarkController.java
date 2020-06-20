@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import my.demo.bookmark.dto.TabulatorBookmarksDto;
-import my.demo.bookmark.dto.converter.TabulatorBookmarksDtoConverter;
+import my.demo.bookmark.dto.TabulatorDto;
+import my.demo.bookmark.dto.converter.TabulatorDtoConverter;
 import my.demo.bookmark.entity.Bookmark;
 import my.demo.bookmark.service.BookmarkService;
 
@@ -90,12 +90,12 @@ public class BookmarkController {
 
 	@GetMapping(value = "/list", produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public TabulatorBookmarksDto list(@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
+	public TabulatorDto<Bookmark> list(@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
 			@RequestParam(name = "size", required = false, defaultValue = "10") Integer pageSize, @RequestParam(name = "sortBy", required = false, defaultValue = "id") String sortBy) {
 	
 		Page<Bookmark> bookmarkPage = bookmarkService.getBookmarksPage(page-1, pageSize, sortBy);
 		
-		return TabulatorBookmarksDtoConverter.convertToDto(bookmarkPage);
+		return TabulatorDtoConverter.<Bookmark>convertToDto(bookmarkPage);
 	}
 
 }
