@@ -46,4 +46,30 @@
 
 		mvn clean test
 
+
+### Docker Setup:
 		
+[Spring Boot Ref](https://spring.io/guides/gs/spring-boot-docker/)
+
+[Docker Command Ref](https://docs.docker.com/engine/reference/commandline/docker/)
+
+- Generate `bookmar.jar` using Maven
+
+		maven clean package
+
+- Build Docker Image from `Dockerfile`
+
+		docker build -t bookmark .
+
+- Create and Start Docker Container
+
+		docker run -p 8080:8080 bookmark
+		
+- Check application is running or not from docker container list
+		
+		docker ps
+
+- Show application image in docker image list
+	
+		docker images
+
