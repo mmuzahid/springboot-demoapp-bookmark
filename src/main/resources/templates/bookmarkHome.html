@@ -29,7 +29,7 @@
 				{ title: "Date", field: "date", formatter: "datetime", formatter: function(cell, formatterParams, onRendered){
 					let dateLocaleString = "";
 					try {
-						dateLocaleString = moment(new Date(Date.parse(cell.getData().date)).toString()).format('YYYY-MM-DD HH:mm');;
+						dateLocaleString = moment(cell.getData().date).format('YYYY-MM-DD HH:mm');
 					} catch(ex){
 						dateLocaleString = "(invalid date)" + ex;
 					}
