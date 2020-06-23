@@ -1,4 +1,4 @@
-package my.demo.bookmark.controller;
+package my.demo.bookmark.playground.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -49,7 +49,7 @@ public class PlaygroundController {
 	
 	@GetMapping("/getNullPointerException")
 	public String getNullPointerException(Model model) {
-		throw new NullPointerException("This is a test NullPointerException");
+		throw new NullPointerException("This is a NullPointerException");
 	}
 	
 	
