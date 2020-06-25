@@ -11,7 +11,7 @@
 		<form method="post" action="/bookmark/">
 
 			<input type="hidden" th:field="*{bookmark.id}" />
-
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 			<div class="form-group col-md-6">
 				<label for="bookmarkDatePicker">DateTime</label>
 				<input id="bookmarkDatePicker" name="date" autocomplete="off" type='text' class="form-control" th:value="${#dates.format(bookmark.date, 'yyyy-MM-dd HH:mm')}"  placeholder="Select a Datetime"/>

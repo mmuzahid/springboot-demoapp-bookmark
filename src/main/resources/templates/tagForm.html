@@ -11,6 +11,7 @@
 		<form method="post" action="/tag/">
 
 			<input type="hidden" th:field="*{tag.id}" />
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
 			<div class="form-group col-md-6">
 				<label for="tagName">Name</label>
