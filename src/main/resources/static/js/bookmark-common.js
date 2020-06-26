@@ -1,8 +1,24 @@
+
+function getCsrfData() {
+	let token = $("meta[name='_csrf']").attr("content");
+    let header = $("meta[name='_csrf_header']").attr("content");
+    let data = {
+    		header: header,
+    		token: token
+    	};
+    
+    return data;
+}
+
 function confirmBookmarkDelete(bookmarkId, afterDeleteAction) {
 	if(confirm("Record will be deleted. Are you sure?")) {
 		jQuery.ajax({
 			url: '/bookmark/' + bookmarkId,
 			type: 'DELETE',
+			beforeSend: function( xhr ) {
+				let csrf = getCsrfData();
+				xhr.setRequestHeader(csrf.header, csrf.token);
+			},
 			success: function(result) {
 				alert('Record deleted Successfully!');
 				afterDeleteAction(); 
@@ -20,6 +36,10 @@ function confirmTagDelete(tagId, afterDeleteAction) {
 		jQuery.ajax({
 			url: '/tag/' + tagId,
 			type: 'DELETE',
+			beforeSend: function( xhr ) {
+				let csrf = getCsrfData();
+				xhr.setRequestHeader(csrf.header, csrf.token);
+			},
 			success: function(result) {
 				alert('Record deleted Successfully!');
 				afterDeleteAction(); 
