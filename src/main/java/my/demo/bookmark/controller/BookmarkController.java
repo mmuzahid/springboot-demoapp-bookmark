@@ -87,6 +87,11 @@ public class BookmarkController {
 	public String home(Model model) {
 		return "bookmarkHome";
 	}
+	
+	@GetMapping("/login")
+	public String login(Model model) {
+		return "login";
+	}
 
 	@GetMapping(value = "/list", produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
