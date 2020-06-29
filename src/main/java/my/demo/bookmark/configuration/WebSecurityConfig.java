@@ -24,7 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.DELETE, "/bookmark/**").hasRole("ADMIN")
         .and()
         //.csrf().disable()
-        .formLogin().disable();
+        .formLogin()//.disable()
+        ;
 	}
 
 	@Override
