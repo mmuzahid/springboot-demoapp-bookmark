@@ -10,22 +10,22 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-		//HTTP Basic authentication
-        .httpBasic()
-        .and()
-        .authorizeRequests()
-        .antMatchers(HttpMethod.GET, "/bookmark/**").hasRole("USER")
-        .antMatchers(HttpMethod.POST, "/bookmark").hasRole("ADMIN")
-        .antMatchers(HttpMethod.PUT, "/bookmark/**").hasRole("ADMIN")
-        .antMatchers(HttpMethod.PATCH, "/bookmark/**").hasRole("ADMIN")
-        .antMatchers(HttpMethod.DELETE, "/bookmark/**").hasRole("ADMIN")
-        .and()
-        //.csrf().disable()
-        .formLogin()//.disable()
-        ;
+		http        
+	        .formLogin()                      
+	        	.and()
+	        .httpBasic()
+	        	.and()
+	        .authorizeRequests()
+	            .antMatchers(HttpMethod.GET, "/bookmark/**").hasRole("USER")
+	            .antMatchers(HttpMethod.POST, "/bookmark/**").hasRole("ADMIN")
+	            .antMatchers(HttpMethod.PUT, "/bookmark/**").hasRole("ADMIN")
+	            .antMatchers(HttpMethod.PATCH, "/bookmark/**").hasRole("ADMIN")
+	            .antMatchers(HttpMethod.DELETE, "/bookmark/**").hasRole("ADMIN")
+       ;
+		
 	}
 
 	@Override
