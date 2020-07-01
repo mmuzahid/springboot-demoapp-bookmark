@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="fragments/header :: head"></head>
+<body>
+	<div class="container">
+        <h1><a href="/bookmark/">My Bookmark List</a></h1>
+        <h3>Bookmark Exception</h3>
+
+        <span th:text="${exception.message}"></span>
+
+
+        <div class="form-group col-md-6">				
+            <button type="button" onclick="window.location.href = '/bookmark/';"  class="btn btn-outline-dark">Go Home</button>
+        </div>
+    </div>
+	
+	
+	<footer lang="en" th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

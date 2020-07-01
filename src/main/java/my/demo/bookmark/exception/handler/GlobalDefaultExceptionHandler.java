@@ -1,4 +1,4 @@
-package my.demo.bookmark.exception;
+package my.demo.bookmark.exception.handler;
 
 import javax.servlet.http.HttpServletRequest;
 

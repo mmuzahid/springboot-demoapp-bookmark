@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import my.demo.bookmark.entity.Bookmark;
+import my.demo.bookmark.exception.BookmarkException;
 import my.demo.bookmark.repository.BookmarkRepository;
 import my.demo.bookmark.service.BookmarkService;
 
@@ -26,7 +28,7 @@ public class BookmarkServiceImpl implements BookmarkService {
         if(bookmark.isPresent()) {
             return bookmark.get();
         } else {
-            throw new RuntimeException("No bookmark record exist for given id");
+            throw new BookmarkException("No bookmark record exist for given id");
         }
 	}
 
@@ -51,7 +53,11 @@ public class BookmarkServiceImpl implements BookmarkService {
 
 	@Override
 	public void deleteBookmarkById(Long id) {
-		bookmarkRepository.deleteById(id);
+		try {
+			bookmarkRepository.deleteById(id);
+		} catch(EmptyResultDataAccessException ex) {
+			throw new BookmarkException("No bookmark record exist to delete");
+		}
 	}
 	
 	@Override

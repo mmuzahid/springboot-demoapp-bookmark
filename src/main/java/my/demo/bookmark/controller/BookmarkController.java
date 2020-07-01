@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import my.demo.bookmark.dto.TabulatorDto;
 import my.demo.bookmark.dto.converter.TabulatorDtoConverter;
 import my.demo.bookmark.entity.Bookmark;
+import my.demo.bookmark.exception.BookmarkException;
 import my.demo.bookmark.service.BookmarkService;
 
 @Controller
@@ -102,5 +104,11 @@ public class BookmarkController {
 		
 		return TabulatorDtoConverter.<Bookmark>convertToDto(bookmarkPage);
 	}
-
+	
+	@ExceptionHandler(BookmarkException.class)
+	public String handleNpeException(BookmarkException ex, Model model) {
+		model.addAttribute("exception", ex);
+		return "bookmarkException";
+	}
+	
 }
