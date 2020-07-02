@@ -34,7 +34,7 @@ public class PlaygroundController {
 
 	@GetMapping("/")
 	public String home() {
-		return "playgroundHome";
+		return "playground/playgroundHome";
 	}
 
 	@GetMapping("/beanScope")
@@ -44,7 +44,7 @@ public class PlaygroundController {
 		model.addAttribute("singletonScopeSettings", singletonScopeSettings);
 		model.addAttribute("prototypeScopeSettings", prototypeScopeSettings);
 
-		return "playgroundBeanScope";
+		return "playground/playgroundBeanScope";
 	}
 	
 	@GetMapping("/getNullPointerException")
@@ -57,7 +57,7 @@ public class PlaygroundController {
 	public String handleNpeException(NullPointerException npe, Model model) {
 		model.addAttribute("type", npe.getClass());
 		model.addAttribute("details", "Exception caught by Controller-based @ExceptionHandler - Message:" + npe.getMessage());
-		return "playgroundExceptionHandler";
+		return "playground/playgroundExceptionHandler";
 	}
 
 }
