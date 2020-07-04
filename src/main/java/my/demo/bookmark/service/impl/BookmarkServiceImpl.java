@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +25,7 @@ public class BookmarkServiceImpl implements BookmarkService {
 	private BookmarkRepository bookmarkRepository;
 	
 	@Override
+	@Cacheable(value = "bookmarks", key="#id")
 	public Bookmark getBookmarkById(Long id) {
 		Optional<Bookmark> bookmark = bookmarkRepository.findById(id);
         if(bookmark.isPresent()) {
@@ -47,11 +50,13 @@ public class BookmarkServiceImpl implements BookmarkService {
 	}
 
 	@Override
+	@CacheEvict(value = "bookmarks", key = "#bookmark.id")
 	public void saveBookmark(Bookmark bookmark) {
 		bookmarkRepository.save(bookmark);
 	}
 
 	@Override
+	@CacheEvict(value = "bookmarks", key = "#id")
 	public void deleteBookmarkById(Long id) {
 		try {
 			bookmarkRepository.deleteById(id);
