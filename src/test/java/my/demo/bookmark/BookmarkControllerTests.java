@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import my.demo.bookmark.controller.BookmarkController;
@@ -27,6 +28,7 @@ public class BookmarkControllerTests {
 	private BookmarkService bookmarkService;
 
 	@Test
+	@WithMockUser(username="testuser", password="testpassword")
 	public void view() throws Exception {
 		Bookmark newBookmark = new Bookmark();
 		newBookmark.setId(1l);
@@ -45,6 +47,9 @@ public class BookmarkControllerTests {
 	}
 
 	@Test
+	@WithMockUser(username = "testuser", password = "testpassword")
+	// @WithMockUser(username = "testuser", password = "testpassword", roles= {"USER"}) // default role is 'USER'
+	// @WithMockUser(username = "testuser", password = "testpassword", authorities = {"ROLE_USER"}) // default authority is 'ROLE_USER'
 	public void edit() throws Exception {
 		Bookmark newBookmark = new Bookmark();
 		newBookmark.setId(1l);
@@ -62,8 +67,8 @@ public class BookmarkControllerTests {
 	}
 
 	@Test
+	@WithMockUser(username="testuser", password="testpassword")
 	public void add() throws Exception {
-
 		mockMvc.perform(get("/bookmark/add").contentType(MediaType.TEXT_HTML)).andExpect(status().isOk());
 
 		mockMvc.perform(get("/bookmark/add/1").contentType(MediaType.TEXT_HTML)).andExpect(status().isNotFound());
@@ -71,18 +76,19 @@ public class BookmarkControllerTests {
 	}
 
 	@Test
+	@WithMockUser(username="testuser", password="testpassword")
 	public void list() throws Exception {
 
 		mockMvc.perform(get("/bookmark/list").contentType(MediaType.TEXT_HTML)).andExpect(status().isOk());
 
 	}
 	
-	
 	@Test
+	@WithMockUser(username="testuser", password="testpassword")
 	public void home() throws Exception {
 
 		mockMvc.perform(get("/bookmark/").contentType(MediaType.TEXT_HTML)).andExpect(status().isOk());
 
-	}	
+	}
 	
 }
