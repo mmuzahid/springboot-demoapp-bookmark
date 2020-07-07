@@ -54,7 +54,7 @@ public class BookmarkController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity delete(@PathVariable(name="id") Long id, Model model) {
+	public ResponseEntity deleteBookmark(@PathVariable(name="id") Long id, Model model) {
 		try{
 			Bookmark bookmark = bookmarkService.getBookmarkById(id);
 			logger.info("Deleting Bookmark: {}", bookmark);

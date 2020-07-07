@@ -3,7 +3,9 @@ package my.demo.bookmark;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
+import java.net.URI;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
@@ -18,8 +20,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import my.demo.bookmark.controller.BookmarkController;
 import my.demo.bookmark.entity.Bookmark;
 import my.demo.bookmark.service.BookmarkService;
-
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
 @WebMvcTest(BookmarkController.class)
 public class BookmarkControllerTests {
@@ -96,7 +96,7 @@ public class BookmarkControllerTests {
 
 	@Test
 	@WithMockUser(username="testadmin", password="testpassword", authorities= {"ROLE_ADMIN"})
-	public void delete() throws Exception {
+	public void deleteBookmark() throws Exception {
 		Bookmark newBookmark = new Bookmark();
 		newBookmark.setId(1l);
 		newBookmark.setDate(new Date());
@@ -106,7 +106,7 @@ public class BookmarkControllerTests {
 		Mockito.when(bookmarkService.getBookmarkById(1l)).thenReturn(newBookmark);
 		Mockito.doNothing().when(bookmarkService).deleteBookmarkById(1l);
 
-		mockMvc.perform(delete("/bookmark/1", 1)
+		mockMvc.perform(delete(new URI("/bookmark/1"))
 					.with(csrf())
 					.contentType(MediaType.TEXT_HTML))
 				.andExpect(status().isNoContent());
