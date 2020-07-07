@@ -6,7 +6,7 @@
 - Spring-boot
 - JPA
 - Hibernate
-- H2 Database
+- MySQL Database
 - JUnit
 - Maven
 
@@ -17,7 +17,7 @@
 - Maven3
 
 ### Database Setup:
-- MySQL Database: Create database `bookmarkdb` and set username and password at src/main/resources/application.properties file as bellow:
+- MySQL Database: Create a database e.g. `bookmarkdb` and set db url, username and password at src/main/resources/application.properties file as bellow:
 		
 		spring.datasource.url=jdbc:mysql://localhost:3306/bookmarkdb
 		spring.datasource.username=root
@@ -72,4 +72,11 @@
 - Show application image in docker image list
 	
 		docker images
+
+
+### Sample Login User
+
+**Admin User:** admin    **Password:** passowrd
+
+**User:** user    **Password:** passowrd
 
