@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import my.demo.bookmark.playground.services.PrototypeScopeSettings;
-import my.demo.bookmark.playground.services.RequestScopeSettings;
-import my.demo.bookmark.playground.services.SessionScopeSettings;
-import my.demo.bookmark.playground.services.SingletonScopeSettings;
+import my.demo.bookmark.playground.service.PrototypeScopeSettings;
+import my.demo.bookmark.playground.service.RequestScopeSettings;
+import my.demo.bookmark.playground.service.SessionScopeSettings;
+import my.demo.bookmark.playground.service.SingletonScopeSettings;
 
 @Controller
 @RequestMapping("/playground")

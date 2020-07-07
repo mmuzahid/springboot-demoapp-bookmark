@@ -1,4 +1,6 @@
-package my.demo.bookmark.playground.services;
+package my.demo.bookmark.playground.service;
+
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,8 +11,8 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 @Service
-@Scope(scopeName = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class RequestScopeSettings {
+@Scope(scopeName = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class SessionScopeSettings {
 	@Autowired
 	private HttpServletRequest request;
 	@Autowired

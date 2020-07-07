@@ -1,4 +1,4 @@
-package my.demo.bookmark.playground.services;
+package my.demo.bookmark.playground.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,8 +9,8 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 @Service
-@Scope(scopeName = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class PrototypeScopeSettings {
+@Scope(scopeName = "singleton", proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class SingletonScopeSettings {
 	@Autowired
 	private HttpServletRequest request;
 	@Autowired
