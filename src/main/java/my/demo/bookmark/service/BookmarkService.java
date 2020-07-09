@@ -1,5 +1,6 @@
 package my.demo.bookmark.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -12,5 +13,6 @@ public interface BookmarkService {
 	public void saveBookmark(Bookmark bookmark);
 	public void deleteBookmarkById(Long id);
 	public Page<Bookmark> getBookmarksPage(Integer page, Integer pageSize, String sortBy);
-	void deleteAllBookmarks();
+	public void deleteAllBookmarks();
+	public void deleteBookmarksDateLessThan(Date date);
 }

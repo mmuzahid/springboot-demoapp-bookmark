@@ -1,5 +1,6 @@
 package my.demo.bookmark.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,6 +69,11 @@ public class BookmarkServiceImpl implements BookmarkService {
 	@Override
 	public void deleteAllBookmarks() {
 		bookmarkRepository.deleteAll();
+	}
+
+	@Override
+	public void deleteBookmarksDateLessThan(Date date) {
+		bookmarkRepository.deleteByDateLessThan(date);
 	}
 
 }
