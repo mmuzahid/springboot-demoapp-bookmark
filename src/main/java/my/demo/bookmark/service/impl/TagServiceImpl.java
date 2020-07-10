@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import my.demo.bookmark.entity.Tag;
+import my.demo.bookmark.exception.TagException;
 import my.demo.bookmark.repository.TagRepository;
 import my.demo.bookmark.service.TagService;
 
@@ -26,7 +27,7 @@ public class TagServiceImpl implements TagService {
         if(tag.isPresent()) {
             return tag.get();
         } else {
-            throw new RuntimeException("No tag record exist for given id");
+            throw new TagException("No tag record exist for given id");
         }
 	}
 
