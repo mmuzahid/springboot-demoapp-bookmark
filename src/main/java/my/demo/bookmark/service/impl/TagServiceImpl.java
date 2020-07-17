@@ -60,4 +60,9 @@ public class TagServiceImpl implements TagService {
 		tagRepository.deleteAll();
 	}
 
+	@Override
+	public List<Tag> getTags() {
+		return tagRepository.findAll();
+	}
+
 }

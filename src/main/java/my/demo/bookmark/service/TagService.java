@@ -13,4 +13,5 @@ public interface TagService {
 	public void deleteTagById(Long id);
 	public Page<Tag> getTagsPage(Integer page, Integer pageSize, String sortBy);
 	void deleteAllTags();
+	public List<Tag> getTags();
 }
