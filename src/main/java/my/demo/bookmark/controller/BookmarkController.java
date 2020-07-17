@@ -26,6 +26,7 @@ import my.demo.bookmark.dto.converter.TabulatorDtoConverter;
 import my.demo.bookmark.entity.Bookmark;
 import my.demo.bookmark.exception.BookmarkException;
 import my.demo.bookmark.service.BookmarkService;
+import my.demo.bookmark.service.TagService;
 
 @Controller
 @RequestMapping("/bookmark")
@@ -34,7 +35,10 @@ public class BookmarkController {
 	private static Logger logger = LoggerFactory.getLogger(BookmarkController.class); 
 	
 	@Autowired
-	private BookmarkService bookmarkService;
+	private BookmarkService bookmarkService;	
+	
+	@Autowired
+	private TagService tagService;
 	
 	@GetMapping(path="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -76,12 +80,14 @@ public class BookmarkController {
 	public String edit(@PathVariable(name="id") Long id, Model model) {
 		Bookmark bookmark = bookmarkService.getBookmarkById(id);
 		model.addAttribute("bookmark", bookmark);
+		model.addAttribute("tags", tagService.getTags());
 		return "bookmarkForm";
 	}
 
 	@GetMapping("/add")
 	public String add(Model model) {
 		model.addAttribute("bookmark", new Bookmark());
+		model.addAttribute("tags", tagService.getTags());
 		return "bookmarkForm";
 	}
 	

@@ -30,6 +30,14 @@
 				<span th:if="${#fields.hasErrors('bookmark.description')}" th:errors="*{bookmark.description}" class="text-danger"></span>
 			</div>
 
+			<div class="form-group col-md-6">
+				<label for="bookmarkTags">Tags</label>
+				<select th:field="*{bookmark.tags}" multiple="multiple">
+				    <option th:each="tag : *{tags}" th:value="${tag.id}" th:text="${tag.name}"></option>
+				</select>
+				<span th:if="${#fields.hasErrors('bookmark.tags')}" th:errors="*{bookmark.tags}" class="text-danger"></span>
+			</div>
+
 			<div class="form-group col-md-6">				
 				<button type="submit" class="btn btn-primary">Save</button>	
 				<button type="button" onclick="window.location.href = '/bookmark/';"  class="btn btn-outline-dark">Go Home</button>
@@ -44,6 +52,12 @@
 			format: 'Y-m-d H:i',
 			inline: false,
 			lang: 'en'
+		});
+		
+		
+		$('#tags').select2({
+			  placeholder: 'Type to Select Tags',
+			  allowClear: true
 		});
 	</script>
 
