@@ -31,6 +31,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Qualifier("databaseUserAuthenticationProvider")
 	private AuthenticationProvider databaseUserAuthenticationProvider;
 	
+	@Autowired
+	@Qualifier("externalApiUserAuthenticationProvider")
+    private AuthenticationProvider externalApiUserAuthenticationProvider;
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http        
@@ -52,6 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 	
 		auth.authenticationProvider(databaseUserAuthenticationProvider);
+		auth.authenticationProvider(externalApiUserAuthenticationProvider);
 		auth.inMemoryAuthentication()
 		  .withUser("user").password(passwordEncoder.encode("password")).roles("USER")
 		  .and()
